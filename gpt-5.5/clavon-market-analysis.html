@@ -1,0 +1,1672 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clavon BP3 764 sqft 2-Bedder Sale Analysis</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #667085;
+      --line: #d8dee8;
+      --paper: #ffffff;
+      --soft: #f5f7fb;
+      --blue: #175cd3;
+      --green: #157f3f;
+      --amber: #b54708;
+      --red: #b42318;
+      --teal: #0f766e;
+      --shadow: 0 16px 44px rgba(24, 39, 75, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #eef2f7;
+      line-height: 1.5;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .hero {
+      min-height: 420px;
+      display: grid;
+      align-items: end;
+      padding: 34px;
+      color: #ffffff;
+      background-color: #12253f;
+      background:
+        linear-gradient(180deg, rgba(7, 18, 40, 0.10), rgba(7, 18, 40, 0.78)),
+        url("https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1800&q=80") center / cover;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 1;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 18px 0 0;
+      font-size: 1.08rem;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.13);
+      color: #ffffff;
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .summary-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .panel {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 0 8px 24px rgba(24, 39, 75, 0.06);
+    }
+
+    .panel h2,
+    .panel h3 {
+      margin: 0 0 12px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .panel h2 {
+      font-size: 1.35rem;
+    }
+
+    .panel h3 {
+      font-size: 1rem;
+      color: #344054;
+    }
+
+    .metric {
+      min-height: 145px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 8px;
+      font-size: clamp(1.45rem, 3vw, 2.05rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .metric small {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .recommendation {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .callout {
+      border-left: 5px solid var(--green);
+      background: #f0fdf4;
+    }
+
+    .callout strong {
+      color: var(--green);
+    }
+
+    .price-band {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .band-row {
+      display: grid;
+      grid-template-columns: 112px 1fr 108px;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    .bar {
+      height: 14px;
+      border-radius: 999px;
+      background: #e6ebf2;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+    }
+
+    .quick span { width: 72%; background: var(--teal); }
+    .realistic span { width: 84%; background: var(--green); }
+    .target span { width: 91%; background: var(--blue); }
+    .stretch span { width: 100%; background: var(--amber); }
+
+    .two-col {
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      margin-top: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+    }
+
+    th,
+    td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #344054;
+      background: var(--soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eaf2ff;
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .warn {
+      background: #fff7ed;
+      color: var(--amber);
+    }
+
+    .good {
+      background: #ecfdf3;
+      color: var(--green);
+    }
+
+    .note-list {
+      margin: 12px 0 0;
+      padding-left: 18px;
+    }
+
+    .note-list li {
+      margin: 8px 0;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .layout-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .formula {
+      margin: 10px 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      color: #344054;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .scenario {
+      min-height: 132px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+    }
+
+    .scenario b {
+      display: block;
+      margin-bottom: 8px;
+      color: #344054;
+      font-size: 0.86rem;
+    }
+
+    .scenario strong {
+      display: block;
+      font-size: 1.28rem;
+    }
+
+    .scenario small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+    }
+
+    .checklist {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .check i {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #ecfdf3;
+      color: var(--green);
+      font-style: normal;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .source-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .source-list a {
+      color: var(--blue);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(23, 92, 211, 0.35);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 8px;
+    }
+
+    .filter-panel {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+    }
+
+    .filter-group b {
+      display: block;
+      margin-bottom: 8px;
+      color: #344054;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .filter-btn {
+      min-height: 36px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #ffffff;
+      color: #344054;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filter-btn[aria-pressed="true"] {
+      border-color: var(--blue);
+      background: #eaf2ff;
+      color: var(--blue);
+    }
+
+    .is-hidden {
+      display: none;
+    }
+
+    .chart-wrap {
+      margin: 14px 0 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .chart-topline {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    #transaction-chart {
+      width: 100%;
+      height: auto;
+      min-height: 260px;
+      display: block;
+    }
+
+    .chart-grid {
+      stroke: #e6ebf2;
+      stroke-width: 1;
+    }
+
+    .chart-axis {
+      stroke: #98a2b3;
+      stroke-width: 1.2;
+    }
+
+    .chart-line {
+      fill: none;
+      stroke: var(--blue);
+      stroke-width: 3;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+
+    .chart-point {
+      fill: #ffffff;
+      stroke: var(--blue);
+      stroke-width: 3;
+    }
+
+    .chart-line-bp1 {
+      stroke: var(--blue);
+    }
+
+    .chart-line-bp2 {
+      stroke: var(--amber);
+    }
+
+    .chart-line-bp3 {
+      stroke: var(--green);
+    }
+
+    .chart-point-bp1 {
+      stroke: var(--blue);
+    }
+
+    .chart-point-bp2 {
+      stroke: var(--amber);
+    }
+
+    .chart-point-bp3 {
+      stroke: var(--green);
+    }
+
+    .chart-target {
+      stroke: var(--green);
+      stroke-width: 2;
+      stroke-dasharray: 7 7;
+    }
+
+    .chart-label {
+      fill: #475467;
+      font-size: 12px;
+    }
+
+    .chart-value {
+      fill: #17202a;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .empty-state {
+      display: none;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .empty-state.is-visible {
+      display: block;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      color: #344054;
+      font-size: 0.88rem;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend i {
+      width: 18px;
+      height: 3px;
+      display: inline-block;
+      border-radius: 999px;
+      background: var(--blue);
+    }
+
+    .legend .bp2 {
+      background: var(--amber);
+    }
+
+    .legend .bp3 {
+      background: var(--green);
+    }
+
+    footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    @media (max-width: 940px) {
+      main {
+        width: min(100% - 22px, 760px);
+        padding-top: 14px;
+      }
+
+      .hero {
+        min-height: 390px;
+        padding: 24px;
+      }
+
+      .summary-grid,
+      .recommendation,
+      .two-col,
+      .filter-panel,
+      .scenario-grid,
+      .layout-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        min-height: 118px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        min-height: 360px;
+        padding: 20px;
+      }
+
+      .panel {
+        padding: 18px;
+      }
+
+      .band-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      main {
+        width: 100%;
+        padding: 0;
+      }
+
+      .hero,
+      .panel {
+        box-shadow: none;
+      }
+
+      .hero {
+        min-height: 280px;
+      }
+
+      a {
+        color: inherit;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div>
+        <div class="meta">
+          <span class="pill">Clavon, Clementi Ave 1</span>
+          <span class="pill">764 sqft</span>
+          <span class="pill">2 Bedroom / 2 Bathroom</span>
+          <span class="pill">BP3 Butterfly Layout</span>
+          <span class="pill">Block 8</span>
+          <span class="pill">19th Floor</span>
+          <span class="pill">South Facing</span>
+          <span class="pill">Sea &amp; Cruise View</span>
+          <span class="pill">No West Sun</span>
+          <span class="pill">Prepared 31 May 2026</span>
+        </div>
+        <h1>Clavon Sale Price Analysis</h1>
+        <p>For this Block 8, 19th-floor BP3 butterfly-layout unit, same-stack transactions support a launch around S$1.728M, with likely negotiation toward S$1.67M to S$1.70M.</p>
+      </div>
+    </section>
+
+    <section class="grid summary-grid">
+      <article class="panel metric">
+        <span>Recommended first asking price</span>
+        <strong>S$1.728M</strong>
+        <small>Approx. S$2,262 psf. Based mainly on Block 8 same-stack #22-16 BP3 at S$2,159 psf, with negotiation buffer.</small>
+      </article>
+      <article class="panel metric">
+        <span>Realistic closing range</span>
+        <strong>S$1.67M-S$1.70M</strong>
+        <small>Same-stack #22-16 already captures the BP3 view/orientation profile.</small>
+      </article>
+      <article class="panel metric">
+        <span>Target price per sqft</span>
+        <strong>S$2,190-S$2,230</strong>
+        <small>Floor-normalized from same-stack Block 8 BP3 evidence.</small>
+      </article>
+      <article class="panel metric">
+        <span>Stretch asking price</span>
+        <strong>S$1.76M</strong>
+        <small>Possible as a test price, but above this looks hard to defend.</small>
+      </article>
+    </section>
+
+    <section class="recommendation">
+      <article class="panel callout">
+        <h2>Simple Recommendation</h2>
+        <p><strong>List at S$1.728M.</strong> Treat offers above S$1.67M as serious, push toward S$1.69M-S$1.70M, and only hold above S$1.72M if there is clear buyer competition.</p>
+        <p>The closest anchor is <strong>Block 8 #22-16 BP3 at S$1.650M / S$2,159 psf</strong>. Your friend's unit is the same Block 8 stack 16 BP3, so this comp already captures the same basic layout, facing, view line, and no-west-sun orientation.</p>
+        <p>The asking price of S$1.728M is about <strong>S$2,262 psf</strong>, or roughly S$103 psf above #22-16. That premium is mainly a negotiation buffer plus modest market/positioning allowance, not an extra view premium.</p>
+      </article>
+
+      <article class="panel">
+        <h2>Price Band</h2>
+        <div class="price-band">
+          <div class="band-row">
+            <b>Quick sale</b>
+            <div class="bar quick"><span></span></div>
+            <strong>S$1.64M-S$1.66M</strong>
+          </div>
+          <div class="band-row">
+            <b>Realistic</b>
+            <div class="bar realistic"><span></span></div>
+            <strong>S$1.67M-S$1.70M</strong>
+          </div>
+          <div class="band-row">
+            <b>Target ask</b>
+            <div class="bar target"><span></span></div>
+            <strong>S$1.72M-S$1.74M</strong>
+          </div>
+          <div class="band-row">
+            <b>Stretch</b>
+            <div class="bar stretch"><span></span></div>
+            <strong>S$1.75M-S$1.76M</strong>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>Unit-Specific Premium</h2>
+      <div class="scenario-grid">
+        <div class="scenario">
+          <b>South facing</b>
+          <strong>Buyer-positive</strong>
+          <small>Usually preferred over harsh west-facing exposure.</small>
+        </div>
+        <div class="scenario">
+          <b>No west sun</b>
+          <strong>Protects value</strong>
+          <small>Helps comfort, cooling cost, and viewing impression.</small>
+        </div>
+        <div class="scenario">
+          <b>Sea &amp; cruise view</b>
+          <strong>Price premium</strong>
+          <small>Main reason to test above generic BP3 comparables.</small>
+        </div>
+        <div class="scenario">
+          <b>19th floor</b>
+          <strong>Mid-high floor</strong>
+          <small>Below #26-07, but still stronger than low-floor BP3 sales.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid two-col">
+      <article class="panel">
+        <h2>BP3 Butterfly Layout Lens</h2>
+        <p>BP1, BP2 and BP3 are all Clavon's 764 sqft 2-bedroom premium family. Your friend's unit is BP3, the butterfly layout, so the best comps are still 764 sqft Clavon units, but the negotiation story should focus on privacy and rental flexibility.</p>
+        <ul class="note-list">
+          <li>Butterfly layouts place bedrooms on opposite sides, which many buyers like for privacy, tenants, guests, or two unrelated occupants.</li>
+          <li>The layout can be more attractive than a standard side-by-side bedroom layout, but the premium is usually modest because the floor area is still the same 764 sqft.</li>
+          <li>For Clavon, BP3 appears in stack 07 at Block 6 and stack 16 at Block 8, so the exact stack matters for pricing.</li>
+        </ul>
+      </article>
+
+      <article class="panel">
+        <h2>Layout Price Adjustment</h2>
+        <div class="scenario-grid layout-grid">
+          <div class="scenario">
+            <b>#19-16 BP3</b>
+            <strong>S$1.67M-S$1.70M</strong>
+            <small>Same stack as #22-16; adjust mainly for floor and recency.</small>
+          </div>
+          <div class="scenario">
+            <b>#19-07 BP3</b>
+            <strong>S$1.70M-S$1.73M</strong>
+            <small>Block 6 related support, less direct than stack 16.</small>
+          </div>
+          <div class="scenario">
+            <b>Exceptional BP3</b>
+            <strong>S$1.74M-S$1.76M</strong>
+            <small>Test only with strong buyer competition.</small>
+          </div>
+          <div class="scenario">
+            <b>Quick Exit</b>
+            <strong>S$1.64M-S$1.66M</strong>
+            <small>Close to the recent same-stack anchor.</small>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid two-col">
+      <article class="panel">
+        <h2>BP Stack Mapping</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Block</th>
+              <th>BP1</th>
+              <th>BP2</th>
+              <th>BP3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>6 Clementi Ave 1</td>
+              <td>Stack 06</td>
+              <td>Stack 03</td>
+              <td><span class="tag good">Stack 07</span></td>
+            </tr>
+            <tr>
+              <td>8 Clementi Ave 1</td>
+              <td>Stack 17</td>
+              <td>Stack 11</td>
+              <td><span class="tag good">Stack 16</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="panel">
+        <h2>What This Means</h2>
+        <ul class="note-list">
+          <li>If your friend's unit number ends with 07, compare most closely to stack 07 BP3 transactions.</li>
+          <li>If it ends with 16, compare most closely to stack 16 BP3 transactions.</li>
+          <li>BP1 and BP2 still matter because they are the same 764 sqft 2-bedroom premium size, but BP3 should be the first pricing anchor.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>Unit Stack to BP Type 对应表</h2>
+      <p>判断方法：看 unit number 最后两位 stack。例如 #22-16 的 stack 是 16；#30-03 的 stack 是 03。再按所在 block 映射到 BP 类型。</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Building / Block</th>
+            <th>Unit Stack</th>
+            <th>BP Type</th>
+            <th>Example Unit</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Block 6</td>
+            <td>03</td>
+            <td>BP2</td>
+            <td>#30-03</td>
+            <td>764 sqft 2BR Premium, BP2 layout</td>
+          </tr>
+          <tr>
+            <td>Block 6</td>
+            <td>06</td>
+            <td>BP1</td>
+            <td>#26-06</td>
+            <td>764 sqft 2BR Premium, BP1 layout</td>
+          </tr>
+          <tr>
+            <td>Block 6</td>
+            <td>07</td>
+            <td>BP3</td>
+            <td>#26-07</td>
+            <td>764 sqft 2BR Premium, BP3 butterfly layout</td>
+          </tr>
+          <tr>
+            <td>Block 8</td>
+            <td>11</td>
+            <td>BP2</td>
+            <td>#04-11</td>
+            <td>764 sqft 2BR Premium, BP2 layout</td>
+          </tr>
+          <tr>
+            <td>Block 8</td>
+            <td>16</td>
+            <td>BP3</td>
+            <td>#22-16 / your #19-16</td>
+            <td>764 sqft 2BR Premium, BP3 butterfly layout</td>
+          </tr>
+          <tr>
+            <td>Block 8</td>
+            <td>17</td>
+            <td>BP1</td>
+            <td>#17-17</td>
+            <td>764 sqft 2BR Premium, BP1 layout</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>BP Transaction Evidence</h2>
+      <p>BP1/BP2/BP3 are inferred by matching exact unit numbers from transaction records to the Clavon stack chart. For example, Block 6 stack 03 maps to BP2, so #30-03 is treated as BP2.</p>
+      <div class="filter-panel">
+        <div class="filter-group">
+          <b>Inferred Type</b>
+          <div class="filter-bar" aria-label="Filter transactions by inferred BP type">
+            <button class="filter-btn" type="button" data-filter-group="type" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-btn" type="button" data-filter-group="type" data-filter="BP1" aria-pressed="false">BP1</button>
+            <button class="filter-btn" type="button" data-filter-group="type" data-filter="BP2" aria-pressed="false">BP2</button>
+            <button class="filter-btn" type="button" data-filter-group="type" data-filter="BP3" aria-pressed="false">BP3</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <b>Chart Mode</b>
+          <div class="filter-bar" aria-label="Choose chart mode">
+            <button class="filter-btn" type="button" data-filter-group="mode" data-filter="combined" aria-pressed="true">Combined</button>
+            <button class="filter-btn" type="button" data-filter-group="mode" data-filter="compare" aria-pressed="false">Compare BP</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <b>Building</b>
+          <div class="filter-bar" aria-label="Filter transactions by building">
+            <button class="filter-btn" type="button" data-filter-group="building" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-btn" type="button" data-filter-group="building" data-filter="6" aria-pressed="false">Block 6</button>
+            <button class="filter-btn" type="button" data-filter-group="building" data-filter="8" aria-pressed="false">Block 8</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <b>Floor Band</b>
+          <div class="filter-bar" aria-label="Filter transactions by floor band">
+            <button class="filter-btn" type="button" data-filter-group="floor" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-btn" type="button" data-filter-group="floor" data-filter="low" aria-pressed="false">Low 1-10</button>
+            <button class="filter-btn" type="button" data-filter-group="floor" data-filter="mid" aria-pressed="false">Mid 11-20</button>
+            <button class="filter-btn" type="button" data-filter-group="floor" data-filter="high" aria-pressed="false">High 21+</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <b>Chart Metric</b>
+          <div class="filter-bar" aria-label="Choose chart metric">
+            <button class="filter-btn" type="button" data-filter-group="metric" data-filter="price" aria-pressed="true">Price</button>
+            <button class="filter-btn" type="button" data-filter-group="metric" data-filter="psf" aria-pressed="false">PSF</button>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-topline">
+          <strong id="chart-title">Filtered transaction trend</strong>
+          <span id="chart-summary">Showing all BP transactions</span>
+        </div>
+        <svg id="transaction-chart" viewBox="0 0 860 320" role="img" aria-labelledby="chart-title"></svg>
+        <div class="legend" id="chart-legend">
+          <span><i></i>BP1</span>
+          <span><i class="bp2"></i>BP2</span>
+          <span><i class="bp3"></i>BP3</span>
+        </div>
+        <div id="empty-state" class="empty-state">No transaction matches these filters.</div>
+      </div>
+      <table id="bp-transactions">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Building</th>
+            <th>Unit</th>
+            <th>Inferred Type</th>
+            <th>Area</th>
+            <th>PSF</th>
+            <th>Price</th>
+            <th>Read for #19 BP3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-date="2026-05-04" data-building="6" data-type="BP2" data-floor="30" data-floor-band="high" data-price="1645000" data-psf="2152">
+            <td>4 May 2026</td>
+            <td>Block 6</td>
+            <td>#30-03</td>
+            <td>BP2</td>
+            <td>764 sqft</td>
+            <td>S$2,152</td>
+            <td>S$1.645M</td>
+            <td><span class="tag good">High-floor BP2</span></td>
+          </tr>
+          <tr data-date="2026-03-25" data-building="6" data-type="BP1" data-floor="6" data-floor-band="low" data-price="1585000" data-psf="2074">
+            <td>25 Mar 2026</td>
+            <td>Block 6</td>
+            <td>#06-06</td>
+            <td>BP1</td>
+            <td>764 sqft</td>
+            <td>S$2,074</td>
+            <td>S$1.585M</td>
+            <td><span class="tag">Low-floor support</span></td>
+          </tr>
+          <tr data-date="2026-03-03" data-building="8" data-type="BP3" data-floor="22" data-floor-band="high" data-price="1650000" data-psf="2159">
+            <td>3 Mar 2026</td>
+            <td>Block 8</td>
+            <td>#22-16</td>
+            <td>BP3</td>
+            <td>764 sqft</td>
+            <td>S$2,159</td>
+            <td>S$1.650M</td>
+            <td><span class="tag good">Closest if #19-16</span></td>
+          </tr>
+          <tr data-date="2026-02-09" data-building="8" data-type="BP1" data-floor="3" data-floor-band="low" data-price="1530000" data-psf="2002">
+            <td>9 Feb 2026</td>
+            <td>Block 8</td>
+            <td>#03-17</td>
+            <td>BP1</td>
+            <td>764 sqft</td>
+            <td>S$2,002</td>
+            <td>S$1.530M</td>
+            <td><span class="tag">Very low floor</span></td>
+          </tr>
+          <tr data-date="2026-01-30" data-building="6" data-type="BP3" data-floor="26" data-floor-band="high" data-price="1730000" data-psf="2264">
+            <td>30 Jan 2026</td>
+            <td>Block 6</td>
+            <td>#26-07</td>
+            <td>BP3</td>
+            <td>764 sqft</td>
+            <td>S$2,264</td>
+            <td>S$1.730M</td>
+            <td><span class="tag good">Closest if #19-07</span></td>
+          </tr>
+          <tr data-date="2025-10-10" data-building="8" data-type="BP3" data-floor="4" data-floor-band="low" data-price="1580000" data-psf="2067">
+            <td>10 Oct 2025</td>
+            <td>Block 8</td>
+            <td>#04-16</td>
+            <td>BP3</td>
+            <td>764 sqft</td>
+            <td>S$2,067</td>
+            <td>S$1.580M</td>
+            <td><span class="tag">Low-floor BP3</span></td>
+          </tr>
+          <tr data-date="2025-08-22" data-building="6" data-type="BP1" data-floor="26" data-floor-band="high" data-price="1711000" data-psf="2239">
+            <td>22 Aug 2025</td>
+            <td>Block 6</td>
+            <td>#26-06</td>
+            <td>BP1</td>
+            <td>764 sqft</td>
+            <td>S$2,239</td>
+            <td>S$1.711M</td>
+            <td><span class="tag">High-floor same-size support</span></td>
+          </tr>
+          <tr data-date="2025-08-22" data-building="6" data-type="BP1" data-floor="5" data-floor-band="low" data-price="1551000" data-psf="2029">
+            <td>22 Aug 2025</td>
+            <td>Block 6</td>
+            <td>#05-06</td>
+            <td>BP1</td>
+            <td>764 sqft</td>
+            <td>S$2,029</td>
+            <td>S$1.551M</td>
+            <td><span class="tag">Low-floor support</span></td>
+          </tr>
+          <tr data-date="2025-08-29" data-building="8" data-type="BP1" data-floor="17" data-floor-band="mid" data-price="1550000" data-psf="2028">
+            <td>29 Aug 2025</td>
+            <td>Block 8</td>
+            <td>#17-17</td>
+            <td>BP1</td>
+            <td>764 sqft</td>
+            <td>S$2,028</td>
+            <td>S$1.550M</td>
+            <td><span class="tag">Block 8 same-size support</span></td>
+          </tr>
+          <tr data-date="2025-08-12" data-building="6" data-type="BP1" data-floor="18" data-floor-band="mid" data-price="1638000" data-psf="2143">
+            <td>12 Aug 2025</td>
+            <td>Block 6</td>
+            <td>#18-06</td>
+            <td>BP1</td>
+            <td>764 sqft</td>
+            <td>S$2,143</td>
+            <td>S$1.638M</td>
+            <td><span class="tag">Same floor band support</span></td>
+          </tr>
+          <tr data-date="2025-08-14" data-building="6" data-type="BP2" data-floor="15" data-floor-band="mid" data-price="1563000" data-psf="2045">
+            <td>14 Aug 2025</td>
+            <td>Block 6</td>
+            <td>#15-03</td>
+            <td>BP2</td>
+            <td>764 sqft</td>
+            <td>S$2,045</td>
+            <td>S$1.563M</td>
+            <td><span class="tag">BP2 support</span></td>
+          </tr>
+          <tr data-date="2025-08-06" data-building="6" data-type="BP2" data-floor="5" data-floor-band="low" data-price="1535000" data-psf="2009">
+            <td>6 Aug 2025</td>
+            <td>Block 6</td>
+            <td>#05-03</td>
+            <td>BP2</td>
+            <td>764 sqft</td>
+            <td>S$2,009</td>
+            <td>S$1.535M</td>
+            <td><span class="tag">Low-floor BP2</span></td>
+          </tr>
+          <tr data-date="2025-07-31" data-building="8" data-type="BP2" data-floor="4" data-floor-band="low" data-price="1490000" data-psf="1950">
+            <td>31 Jul 2025</td>
+            <td>Block 8</td>
+            <td>#04-11</td>
+            <td>BP2</td>
+            <td>764 sqft</td>
+            <td>S$1,950</td>
+            <td>S$1.490M</td>
+            <td><span class="tag">Block 8 BP2 low floor</span></td>
+          </tr>
+          <tr data-date="2025-07-16" data-building="8" data-type="BP3" data-floor="28" data-floor-band="high" data-price="1680000" data-psf="2198">
+            <td>16 Jul 2025</td>
+            <td>Block 8</td>
+            <td>#28-16</td>
+            <td>BP3</td>
+            <td>764 sqft</td>
+            <td>S$2,198</td>
+            <td>S$1.680M</td>
+            <td><span class="tag good">Same-stack high-floor support</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="grid two-col">
+      <article class="panel">
+        <h2>Recent Comparable Evidence</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Project / Type / Size</th>
+              <th>Date</th>
+              <th>Floor Band</th>
+              <th>Price</th>
+              <th>PSF</th>
+              <th>Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Clavon, 2BR Premium 764 sqft</td>
+              <td>May 2026</td>
+              <td>26-30</td>
+              <td>S$1.645M</td>
+              <td>S$2,153</td>
+              <td><span class="tag good">Strong anchor</span></td>
+            </tr>
+            <tr>
+              <td>Clavon, 2BR Premium 764 sqft</td>
+              <td>Mar 2026</td>
+              <td>21-25</td>
+              <td>S$1.650M</td>
+              <td>S$2,160</td>
+              <td><span class="tag good">Very relevant</span></td>
+            </tr>
+            <tr>
+              <td>Clavon, 2BR Premium 764 sqft</td>
+              <td>Mar 2026</td>
+              <td>06-10</td>
+              <td>S$1.585M</td>
+              <td>S$2,075</td>
+              <td><span class="tag">Lower floor</span></td>
+            </tr>
+            <tr>
+              <td>Active listings, 2BR Premium 764 sqft</td>
+              <td>May 2026</td>
+              <td>Various</td>
+              <td>S$1.65M-S$1.80M</td>
+              <td>S$2,159-S$2,356</td>
+              <td><span class="tag warn">Asking only</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="panel">
+        <h2>How to Interpret It</h2>
+        <ul class="note-list">
+          <li>The closest evidence is the 764 sqft 2-bedroom premium band inside Clavon itself, not broad Clementi averages.</li>
+          <li>Exact BP3 resales create a useful base bracket: Block 8 #22-16 at S$1.650M and Block 6 #26-07 at S$1.730M.</li>
+          <li>Because this unit is in Block 8, #22-16 and #04-16 are more direct comps; #26-07 is useful high-floor support from the other tower.</li>
+          <li>S$1.80M means about S$2,356 psf, which is possible as a marketing test but should not be the expected成交 price.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>Price Scenarios for 764 sqft</h2>
+      <div class="scenario-grid">
+        <div class="scenario">
+          <b>S$2,150 psf</b>
+          <strong>S$1.643M</strong>
+          <small>Recent caveat anchor.</small>
+        </div>
+        <div class="scenario">
+          <b>S$2,200 psf</b>
+          <strong>S$1.681M</strong>
+          <small>Realistic negotiation target.</small>
+        </div>
+        <div class="scenario">
+          <b>S$2,250 psf</b>
+          <strong>S$1.719M</strong>
+          <small>Lower end of realistic target for this unit.</small>
+        </div>
+        <div class="scenario">
+          <b>S$2,356 psf</b>
+          <strong>S$1.800M</strong>
+          <small>Aggressive stretch level.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>Valuation Formula</h2>
+      <p>The estimate starts from comparable transaction PSF, then adjusts for floor, match quality, and recency. View/orientation is only added when the comparable does not already share the same stack or same facing.</p>
+      <div class="formula">Adjusted PSF = Comp PSF + Floor Adjustment + Recency Adjustment + Match Adjustment + Unique Feature Adjustment</div>
+      <div class="formula">Implied Price = Adjusted PSF x 764 sqft</div>
+      <div class="formula">Suggested Asking = Expected Closing Price + Negotiation Buffer</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>How Calculated</th>
+            <th>Current Assumption</th>
+            <th>Why It Matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Same-stack anchor</td>
+            <td>Use Block 8 BP3 stack 16 first</td>
+            <td>#22-16 at S$2,159 psf</td>
+            <td>Closest match to #19-16.</td>
+          </tr>
+          <tr>
+            <td>Floor adjustment</td>
+            <td>(Subject floor - comp floor) x floor premium</td>
+            <td>-3 floors x S$8-S$12 psf = -S$24 to -S$36 psf</td>
+            <td>#19 is below #22, so slightly lower than #22 all else equal.</td>
+          </tr>
+          <tr>
+            <td>View premium</td>
+            <td>Add only if the comp does not share the same view line</td>
+            <td>S$0 vs #22-16; possible +S$40 to +S$80 psf vs unrelated comps</td>
+            <td>Avoids double-counting same-stack view.</td>
+          </tr>
+          <tr>
+            <td>Orientation premium</td>
+            <td>Add only if the comp has different orientation/sun exposure</td>
+            <td>S$0 vs #22-16; possible +S$10 to +S$30 psf vs weaker orientation</td>
+            <td>Same Block 8 stack should already capture orientation.</td>
+          </tr>
+          <tr>
+            <td>Recency adjustment</td>
+            <td>Add small uplift if market rose after comp date</td>
+            <td>+S$20 to +S$40 psf</td>
+            <td>March 2026 comp may be slightly stale by listing date.</td>
+          </tr>
+          <tr>
+            <td>Negotiation buffer</td>
+            <td>Asking price - expected closing price</td>
+            <td>S$18k to S$38k</td>
+            <td>Leaves room to negotiate without looking unrealistic.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>Adjusted Comparable Calculation</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Comparable</th>
+            <th>Base PSF</th>
+            <th>Adjustments</th>
+            <th>Adjusted PSF</th>
+            <th>Implied Price</th>
+            <th>Confidence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Block 8 #22-16 BP3</td>
+            <td>S$2,159</td>
+            <td>-S$30 floor + S$0 view/orientation + S$30 recency</td>
+            <td>S$2,159</td>
+            <td>S$1.650M</td>
+            <td><span class="tag good">Highest</span></td>
+          </tr>
+          <tr>
+            <td>Block 8 #04-16 BP3</td>
+            <td>S$2,067</td>
+            <td>+S$150 floor + S$0 view/orientation + S$35 recency</td>
+            <td>S$2,252</td>
+            <td>S$1.721M</td>
+            <td><span class="tag warn">Overstates floor uplift risk</span></td>
+          </tr>
+          <tr>
+            <td>Block 6 #26-07 BP3</td>
+            <td>S$2,264</td>
+            <td>-S$70 floor + S$0 recency - S$20 different block</td>
+            <td>S$2,174</td>
+            <td>S$1.661M</td>
+            <td><span class="tag">Related support</span></td>
+          </tr>
+          <tr>
+            <td>Block 6 #18-06 BP1</td>
+            <td>S$2,143</td>
+            <td>+S$10 floor + S$35 recency + S$15 BP3 layout + S$40 possible view match</td>
+            <td>S$2,243</td>
+            <td>S$1.714M</td>
+            <td><span class="tag">Same floor band support</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The most defensible estimate should lean on #22-16, then sanity-check against #26-07 and #18-06. The same-stack #22-16 calculation does not add view or orientation premium because that would double-count what the transaction already reflects.</p>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>Floor-Normalized BP3 Comparison</h2>
+      <p>This answers the question: after adjusting both BP3 transactions to a 19th-floor equivalent, how different are they really?</p>
+      <div class="formula">Floor-normalized PSF = Transaction PSF + (Subject Floor - Transaction Floor) x Floor Premium Per Level</div>
+      <div class="formula">Subject Floor = 19; assumed floor premium = S$10 psf per floor</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Transaction</th>
+            <th>Actual PSF</th>
+            <th>Floor Gap to 19F</th>
+            <th>Floor Adjustment</th>
+            <th>19F Normalized PSF</th>
+            <th>19F Normalized Price</th>
+            <th>Read</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Block 6 #26-07 BP3</td>
+            <td>S$2,264</td>
+            <td>19 - 26 = -7 floors</td>
+            <td>-S$70 psf</td>
+            <td>S$2,194</td>
+            <td>S$1.676M</td>
+            <td><span class="tag">Other block support</span></td>
+          </tr>
+          <tr>
+            <td>Block 8 #22-16 BP3</td>
+            <td>S$2,159</td>
+            <td>19 - 22 = -3 floors</td>
+            <td>-S$30 psf</td>
+            <td>S$2,129</td>
+            <td>S$1.626M</td>
+            <td><span class="tag good">Closest stack</span></td>
+          </tr>
+          <tr>
+            <td>Normalized difference</td>
+            <td>S$105 psf actual gap</td>
+            <td>4-floor relative gap</td>
+            <td>S$40 psf explained by floor</td>
+            <td>S$65 psf unexplained gap</td>
+            <td>About S$50k</td>
+            <td><span class="tag warn">Likely block/stack/facing/date mix</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>So yes, the S$80k price difference between #26-07 and #22-16 is not purely floor. Using S$10 psf per floor, about S$31k is explained by floor difference, leaving roughly S$50k that may come from block, stack, facing, view, condition, negotiation timing, or buyer-specific factors.</p>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>Floor Premium Sensitivity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Assumed Floor Premium</th>
+            <th>#26-07 Normalized to 19F</th>
+            <th>#22-16 Normalized to 19F</th>
+            <th>Remaining Gap</th>
+            <th>Interpretation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>S$5 psf/floor</td>
+            <td>S$2,229 psf / S$1.703M</td>
+            <td>S$2,144 psf / S$1.638M</td>
+            <td>S$85 psf / S$65k</td>
+            <td>Floor explains little; other differences matter more.</td>
+          </tr>
+          <tr>
+            <td>S$10 psf/floor</td>
+            <td>S$2,194 psf / S$1.676M</td>
+            <td>S$2,129 psf / S$1.626M</td>
+            <td>S$65 psf / S$50k</td>
+            <td>Balanced assumption for rough normalization.</td>
+          </tr>
+          <tr>
+            <td>S$15 psf/floor</td>
+            <td>S$2,159 psf / S$1.649M</td>
+            <td>S$2,114 psf / S$1.615M</td>
+            <td>S$45 psf / S$34k</td>
+            <td>Floor explains more, but not all of the gap.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>For valuation, I would use S$10-S$15 psf per floor as a sensitivity range, not a fixed truth. The direct Block 8 #22-16 comp is still the better anchor for your friend’s Block 8 unit.</p>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>Final Price Logic</h2>
+      <div class="formula">Most defensible adjusted comp: #22-16 -> S$2,159 psf x 764 sqft = S$1.650M, after floor/recency roughly unchanged</div>
+      <div class="formula">Expected closing range = same-stack anchor S$1.650M + market/viewing strength buffer S$20k-S$50k = S$1.67M-S$1.70M</div>
+      <div class="formula">Recommended asking = S$1.67M-S$1.70M expected close + about S$28k-S$58k negotiation buffer = S$1.728M</div>
+      <p>So the S$1.728M asking price is not the expected closing price. It is a launch price designed to make room for negotiation while keeping the final target around S$1.67M-S$1.70M.</p>
+    </section>
+
+    <section class="grid two-col">
+      <article class="panel">
+        <h2>Suggested Selling Plan</h2>
+        <div class="checklist">
+          <div class="check">
+            <i>1</i>
+            <div><strong>Week 1-2:</strong> Launch at S$1.728M with photos that clearly show sea/cruise view, south-facing light, and no west sun.</div>
+          </div>
+          <div class="check">
+            <i>2</i>
+            <div><strong>Serious offer line:</strong> Treat S$1.67M+ as real interest; negotiate toward S$1.69M-S$1.70M.</div>
+          </div>
+          <div class="check">
+            <i>3</i>
+            <div><strong>If response is weak:</strong> Adjust asking to S$1.69M-S$1.70M after 3-4 weeks rather than letting the listing go stale.</div>
+          </div>
+          <div class="check">
+            <i>4</i>
+            <div><strong>If response is strong:</strong> Hold closer to S$1.72M only when multiple buyers are viewing or competing.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>Before Accepting an Offer</h2>
+        <ul class="note-list">
+          <li>Confirm exact purchase date and Seller's Stamp Duty position.</li>
+          <li>Check whether the unit is vacant, tenanted, or sold with tenancy.</li>
+          <li>Compare current same-size Clavon listings on the same week of launch, especially BP3 or the closest matching stacks.</li>
+          <li>Ask the agent to show recent caveats by stack/type where possible, not only asking prices.</li>
+          <li>Make the view do real work: schedule viewings when the sea/cruise view is clearest and the unit is bright.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>Market Context</h2>
+      <p>URA's Q1 2026 numbers show the Outside Central Region non-landed segment was still supported, with OCR prices rising quarter-on-quarter. That helps Clementi sellers, but Clavon buyers can compare many similar 764 sqft 2-bedroom premium units, so pricing too far above recent caveats can reduce viewing interest.</p>
+      <div class="source-list">
+        <a href="https://clavon.org/floor-plans/" target="_blank" rel="noreferrer">Clavon floor plans</a>
+        <a href="https://clavon-residences.com.sg/wp-content/uploads/2020/11/Clavon-Condo-Floorplan-eBrouchure.pdf" target="_blank" rel="noreferrer">Clavon brochure floor plan</a>
+        <a href="https://clavon.org/zodsapsa/Clavon-Balance-Unit-Chart.pdf" target="_blank" rel="noreferrer">Clavon balance unit chart</a>
+        <a href="https://propertynoob.com/condo/clavon/profitability" target="_blank" rel="noreferrer">PropertyNoob exact-unit transactions</a>
+        <a href="https://stackproperty.sg/private/projects/clavon" target="_blank" rel="noreferrer">StackProperty Clavon transactions</a>
+        <a href="https://www.99.co/singapore/condos-apartments/clavon" target="_blank" rel="noreferrer">99.co Clavon data</a>
+        <a href="https://www.propertyguru.com.sg/property-for-sale/2?beds%5B0%5D=2&amp;property_id=24518&amp;property_type=N&amp;property_type_code=CONDO" target="_blank" rel="noreferrer">PropertyGuru Clavon listings</a>
+        <a href="https://www.ura.gov.sg/Corporate/Media-Room/Media-Releases/pr26-31" target="_blank" rel="noreferrer">URA Q1 2026 release</a>
+        <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/selling-or-disposing-property/seller%27s-stamp-duty-%28ssd%29-for-residential-property" target="_blank" rel="noreferrer">IRAS Seller's Stamp Duty</a>
+      </div>
+    </section>
+
+    <footer>
+      This is a decision aid, not a valuation report. Final pricing should be checked against the newest caveats and active competition on the week the unit is listed.
+    </footer>
+  </main>
+  <script>
+    const state = {
+      type: "all",
+      building: "all",
+      floor: "all",
+      metric: "price",
+      mode: "combined"
+    };
+
+    const chart = document.querySelector("#transaction-chart");
+    const chartLegend = document.querySelector("#chart-legend");
+    const chartSummary = document.querySelector("#chart-summary");
+    const emptyState = document.querySelector("#empty-state");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const transactionBody = document.querySelector("#bp-transactions tbody");
+    const transactionRows = [...document.querySelectorAll("#bp-transactions tbody tr")];
+    const transactionData = transactionRows.map((row) => ({
+      row,
+      date: new Date(`${row.dataset.date}T00:00:00`),
+      building: row.dataset.building,
+      type: row.dataset.type,
+      floorBand: row.dataset.floorBand,
+      price: Number(row.dataset.price),
+      psf: Number(row.dataset.psf),
+      label: `${row.children[1].textContent.trim()} ${row.children[2].textContent.trim()}`
+    }));
+
+    [...transactionData]
+      .sort((a, b) => b.date - a.date)
+      .forEach((item) => transactionBody.appendChild(item.row));
+
+    const money = new Intl.NumberFormat("en-SG", {
+      style: "currency",
+      currency: "SGD",
+      maximumFractionDigits: 0
+    });
+
+    const createSvgElement = (tag, attributes = {}) => {
+      const element = document.createElementNS("http://www.w3.org/2000/svg", tag);
+      Object.entries(attributes).forEach(([key, value]) => {
+        element.setAttribute(key, value);
+      });
+      return element;
+    };
+
+    const formatMetric = (value) => {
+      if (state.metric === "price") {
+        return `S$${(value / 1000000).toFixed(3)}M`;
+      }
+
+      return `S$${Math.round(value).toLocaleString("en-SG")} psf`;
+    };
+
+    const formatDate = (date) => (
+      date.toLocaleDateString("en-SG", { month: "short", year: "2-digit" })
+    );
+
+    const getFilteredData = () => transactionData
+      .filter((item) => state.type === "all" || item.type === state.type)
+      .filter((item) => state.building === "all" || item.building === state.building)
+      .filter((item) => state.floor === "all" || item.floorBand === state.floor)
+      .sort((a, b) => a.date - b.date);
+
+    const getXDomain = (data) => {
+      const dates = data.map((item) => item.date.getTime());
+      return {
+        minDate: Math.min(...dates),
+        maxDate: Math.max(...dates)
+      };
+    };
+
+    const groupedByType = (data) => (
+      ["BP1", "BP2", "BP3"].map((type) => ({
+        type,
+        items: data.filter((item) => item.type === type)
+      })).filter((group) => group.items.length)
+    );
+
+    const drawPoint = (item, x, y, index) => {
+      const typeClass = item.type.toLowerCase();
+      chart.appendChild(createSvgElement("circle", {
+        cx: x,
+        cy: y,
+        r: 6,
+        class: `chart-point chart-point-${typeClass}`
+      }));
+      chart.appendChild(createSvgElement("text", {
+        x,
+        y: y - 12,
+        "text-anchor": "middle",
+        class: "chart-value"
+      })).textContent = formatMetric(item[state.metric]);
+      chart.appendChild(createSvgElement("text", {
+        x,
+        y: 294 + (index % 2) * 16,
+        "text-anchor": "middle",
+        class: "chart-label"
+      })).textContent = `${formatDate(item.date)} ${item.label}`;
+    };
+
+    const drawChart = (data) => {
+      chart.replaceChildren();
+      emptyState.classList.toggle("is-visible", data.length === 0);
+      chartLegend.style.display = state.mode === "compare" && data.length ? "flex" : "none";
+
+      const width = 860;
+      const height = 320;
+      const margin = { top: 26, right: 24, bottom: 58, left: 78 };
+      const innerWidth = width - margin.left - margin.right;
+      const innerHeight = height - margin.top - margin.bottom;
+      const metricKey = state.metric;
+      const targetValue = metricKey === "price" ? 1728000 : 2262;
+
+      if (!data.length) {
+        chart.appendChild(createSvgElement("text", {
+          x: width / 2,
+          y: height / 2,
+          "text-anchor": "middle",
+          class: "chart-label"
+        })).textContent = "No matching transactions";
+        return;
+      }
+
+      const values = data.map((item) => item[metricKey]);
+      const minRaw = Math.min(...values, targetValue);
+      const maxRaw = Math.max(...values, targetValue);
+      const padding = Math.max((maxRaw - minRaw) * 0.16, metricKey === "price" ? 25000 : 35);
+      const yMin = minRaw - padding;
+      const yMax = maxRaw + padding;
+      const { minDate, maxDate } = getXDomain(data);
+      const dateRange = Math.max(maxDate - minDate, 1);
+
+      const xFor = (date) => {
+        if (data.length === 1) {
+          return margin.left + innerWidth / 2;
+        }
+
+        return margin.left + ((date.getTime() - minDate) / dateRange) * innerWidth;
+      };
+
+      const yFor = (value) => margin.top + ((yMax - value) / (yMax - yMin)) * innerHeight;
+
+      [0, 0.25, 0.5, 0.75, 1].forEach((step) => {
+        const y = margin.top + step * innerHeight;
+        const value = yMax - step * (yMax - yMin);
+        chart.appendChild(createSvgElement("line", {
+          x1: margin.left,
+          y1: y,
+          x2: width - margin.right,
+          y2: y,
+          class: "chart-grid"
+        }));
+        chart.appendChild(createSvgElement("text", {
+          x: margin.left - 12,
+          y: y + 4,
+          "text-anchor": "end",
+          class: "chart-label"
+        })).textContent = state.metric === "price"
+          ? `S$${(value / 1000000).toFixed(2)}M`
+          : `${Math.round(value).toLocaleString("en-SG")}`;
+      });
+
+      chart.appendChild(createSvgElement("line", {
+        x1: margin.left,
+        y1: margin.top + innerHeight,
+        x2: width - margin.right,
+        y2: margin.top + innerHeight,
+        class: "chart-axis"
+      }));
+      chart.appendChild(createSvgElement("line", {
+        x1: margin.left,
+        y1: margin.top,
+        x2: margin.left,
+        y2: margin.top + innerHeight,
+        class: "chart-axis"
+      }));
+
+      const targetY = yFor(targetValue);
+      chart.appendChild(createSvgElement("line", {
+        x1: margin.left,
+        y1: targetY,
+        x2: width - margin.right,
+        y2: targetY,
+        class: "chart-target"
+      }));
+      chart.appendChild(createSvgElement("text", {
+        x: width - margin.right,
+        y: targetY - 8,
+        "text-anchor": "end",
+        class: "chart-label"
+        })).textContent = state.metric === "price" ? "S$1.728M ask" : "S$2,262 psf ask";
+
+      if (state.mode === "compare") {
+        let labelIndex = 0;
+        groupedByType(data).forEach((group) => {
+          const points = group.items.map((item) => `${xFor(item.date)},${yFor(item[metricKey])}`).join(" ");
+          if (group.items.length > 1) {
+            chart.appendChild(createSvgElement("polyline", {
+              points,
+              class: `chart-line chart-line-${group.type.toLowerCase()}`
+            }));
+          }
+
+          group.items.forEach((item) => {
+            drawPoint(item, xFor(item.date), yFor(item[metricKey]), labelIndex);
+            labelIndex += 1;
+          });
+        });
+        return;
+      }
+
+      const points = data.map((item) => `${xFor(item.date)},${yFor(item[metricKey])}`).join(" ");
+      if (data.length > 1) {
+        chart.appendChild(createSvgElement("polyline", {
+          points,
+          class: "chart-line"
+        }));
+      }
+
+      data.forEach((item, index) => {
+        drawPoint(item, xFor(item.date), yFor(item[metricKey]), index);
+      });
+    };
+
+    const updateView = () => {
+      const filteredData = getFilteredData();
+
+      transactionData.forEach((item) => {
+        const shouldShow = filteredData.includes(item);
+        item.row.classList.toggle("is-hidden", !shouldShow);
+      });
+
+      const typeLabel = state.type === "all" ? "all BP types" : state.type;
+      const buildingLabel = state.building === "all" ? "both buildings" : `Block ${state.building}`;
+      const floorLabel = {
+        all: "all floors",
+        low: "low floors",
+        mid: "mid floors",
+        high: "high floors"
+      }[state.floor];
+      const metricLabel = state.metric === "price" ? "price" : "PSF";
+      const modeLabel = state.mode === "compare" ? "BP comparison" : "combined trend";
+      chartSummary.textContent = `${filteredData.length} transaction(s), ${typeLabel}, ${buildingLabel}, ${floorLabel}, ${modeLabel}, charting ${metricLabel}`;
+      drawChart(filteredData);
+    };
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const group = button.dataset.filterGroup;
+        state[group] = button.dataset.filter;
+
+        document.querySelectorAll(`.filter-btn[data-filter-group="${group}"]`).forEach((item) => {
+          item.setAttribute("aria-pressed", String(item === button));
+        });
+
+        updateView();
+      });
+    });
+
+    updateView();
+  </script>
+</body>
+</html>
