@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How the #19-16 Price Was Predicted · Method & Confidence</title>
+<style>
+:root{
+  --navy:#0f2a43; --navy2:#16395c; --teal:#1f9c8f; --gold:#c79a3a; --gold2:#e8c97a;
+  --ink:#11212f; --muted:#5f7283; --line:#e2e8ee; --bg:#f4f7fa; --card:#ffffff;
+  --good:#1f9c8f; --warn:#c0653a; --red:#c0392b; --hi:#fff6e0;
+  --shadow:0 1px 2px rgba(16,33,47,.06),0 8px 24px rgba(16,33,47,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+a{color:var(--teal)}
+h1,h2,h3{line-height:1.25;margin:0}
+.tag{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.back{display:inline-block;margin-bottom:8px;font-size:13px;color:#b9cbdc;text-decoration:none}
+.back:hover{color:#fff}
+
+header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:30px 0 28px}
+header h1{font-size:28px;font-weight:700;margin:6px 0 6px}
+header .sub{color:#b9cbdc;font-size:14px;max-width:680px}
+
+.hero{margin-top:-22px}
+.hero-card{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:24px 26px;border:1px solid var(--line)}
+.verdict-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;align-items:center;margin-top:14px}
+@media(max-width:760px){.verdict-grid{grid-template-columns:1fr}}
+.gauge{text-align:center}
+.gauge .score{font-size:46px;font-weight:800;color:var(--teal);line-height:1}
+.gauge .of{font-size:16px;color:var(--muted);font-weight:600}
+.gauge .lab{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:6px}
+.meter{height:10px;border-radius:6px;background:linear-gradient(90deg,#e07a5f,#e8c97a,#1f9c8f);position:relative;margin:16px 6px 4px}
+.meter .pin{position:absolute;top:-5px;width:4px;height:20px;background:var(--navy);border-radius:3px;box-shadow:0 0 0 3px #fff}
+.meter-l{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin:2px 6px 0}
+.verdict-txt{font-size:15px;color:#28475f}
+.verdict-txt b{color:var(--navy)}
+
+section{margin:38px 0}
+section h2{font-size:21px;color:var(--navy);margin-bottom:4px}
+section .lead{color:var(--muted);font-size:14px;margin-bottom:18px;max-width:760px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:22px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+@media(max-width:760px){.pipe{grid-template-columns:1fr 1fr}}
+.step{position:relative;padding:16px 14px;border:1px solid var(--line);background:#fbfdfe;border-radius:12px;margin:5px}
+.step .no{width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.step h4{font-size:13px;color:var(--navy);margin:0 0 4px}
+.step p{font-size:12px;color:var(--muted);margin:0}
+
+/* equation */
+.eq{background:#0f2a43;color:#dbe7f1;border-radius:12px;padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;overflow-x:auto;line-height:1.9}
+.eq .v{color:var(--gold2);font-weight:700}
+.eq .c{color:#7fd4c8;font-weight:700}
+.coef{border-collapse:collapse;width:100%;font-size:14px;margin-top:8px}
+.coef td{padding:8px 6px;border-bottom:1px solid var(--line)}
+.coef td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--navy)}
+.coef td:nth-child(2){text-align:right;color:var(--muted);font-size:12px}
+
+/* stat chips */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px;box-shadow:var(--shadow)}
+.stat .n{font-size:22px;font-weight:750;color:var(--navy)}
+.stat .l{font-size:11.5px;color:var(--muted);margin-top:2px}
+
+/* pred interval band */
+.band-fig{padding:8px 4px 0}
+.scale{position:relative;height:64px;margin:30px 10px 8px}
+.scale .axis{position:absolute;top:38px;left:0;right:0;height:2px;background:var(--line)}
+.scale .ci{position:absolute;top:30px;height:18px;background:rgba(31,156,143,.18);border:1px solid var(--teal);border-radius:4px}
+.scale .mark{position:absolute;top:20px;width:2px;height:38px;background:var(--navy)}
+.scale .mark.gold{background:var(--gold)}
+.scale .mlab{position:absolute;top:-2px;transform:translateX(-50%);font-size:11px;color:var(--muted);text-align:center;white-space:nowrap}
+.scale .mlab b{display:block;color:var(--navy);font-size:12px}
+
+/* pros cons */
+.pc{border-radius:12px;padding:18px 20px}
+.pc.pro{background:#f0f8f7;border:1px solid #bfe2dd}
+.pc.con{background:#fff5f0;border:1px solid #f0c9b6}
+.pc h3{font-size:15px;margin-bottom:8px}
+.pc.pro h3{color:var(--teal)} .pc.con h3{color:var(--warn)}
+.pc ul{margin:0;padding-left:18px}
+.pc li{font-size:13.5px;margin:9px 0;color:#33495b}
+.pc li b{color:var(--ink)}
+
+/* confidence-by-claim */
+.claims{border-collapse:collapse;width:100%;font-size:14px}
+.claims th{text-align:left;background:var(--navy);color:#fff;padding:10px 12px;font-size:12px;font-weight:600}
+.claims td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.claims td:last-child{text-align:right;white-space:nowrap}
+.rate{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.03em}
+.r-vh{background:#d6efe9;color:#147568}
+.r-h{background:#e4f0d9;color:#4b7a2a}
+.r-m{background:#fbeede;color:#b07020}
+.r-l{background:#fbe0da;color:#b23a26}
+.note{font-size:12px;color:var(--muted);margin-top:6px}
+
+ul.notes{margin:6px 0 0;padding-left:18px;font-size:14px;color:#33495b}
+ul.notes li{margin:8px 0}
+.pill{display:inline-block;background:#eef4f3;color:var(--teal);border-radius:6px;padding:1px 7px;font-weight:600}
+.foot{color:var(--muted);font-size:12px;text-align:center;padding:28px 0 50px;line-height:1.7}
+.kbd{font-family:ui-monospace,monospace;background:#eef2f5;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="back" href="./">&larr; Back to the #19-16 valuation report</a>
+    <span class="tag">Methodology · Confidence · Limitations</span>
+    <h1>How the &nbsp;#19-16&nbsp; price was predicted</h1>
+    <div class="sub">A plain-English account of the model behind the recommendation, what it does well, where it can be wrong, and exactly how much to trust each number &mdash; grounded in the data that was actually available.</div>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <div class="hero-card">
+    <span class="tag">Overall confidence</span>
+    <h2 style="color:var(--navy);font-size:20px;margin-top:4px">How much to trust the recommendation</h2>
+    <div class="verdict-grid">
+      <div class="verdict-txt">
+        <p style="margin-top:0"><b>The <i>range</i> is solid; the exact number is a best-estimate.</b> The pricing band (~<b>$1.63M&ndash;$1.71M</b>, $2,130&ndash;$2,240 psf) is well supported by recent comparable sales and a high-fit model. The single point estimate of <b>$1.67M</b> carries a real-world error of about <b>&plusmn;$33k</b>, because the data that matters most &mdash; <i>true resales of this exact unit type, right now</i> &mdash; is thin.</p>
+        <p style="margin-bottom:0">Treat <b>$1.67M as the centre of gravity</b> for negotiation, <b>$1.74M as the anchor</b> you list at, and <b>$1.63M as the line you don't cross</b>. The relative logic (BP3 &gt; BP1 &gt; BP2, higher floor = more, market rising) is the most trustworthy part.</p>
+      </div>
+      <div class="gauge">
+        <div><span class="score">7</span><span class="of">/10</span></div>
+        <div class="lab">Confidence rating</div>
+        <div class="meter"><div class="pin" style="left:70%"></div></div>
+        <div class="meter-l"><span>Guess</span><span>Solid</span><span>Certain</span></div>
+        <p class="note" style="margin-top:10px">High on the <b>band</b> &amp; direction · Moderate on the <b>point</b> price</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section>
+  <h2>The recipe, in five steps</h2>
+  <p class="lead">Nothing here is a black box. The whole pipeline is reproducible from one script (<span class="kbd">build.py</span>) over the raw caveat data.</p>
+  <div class="pipe">
+    <div class="step"><div class="no">1</div><h4>Collect</h4><p>826 transaction caveats for Clavon, scraped from propertynoob.com (Dec 2020 launch &rarr; May 2026).</p></div>
+    <div class="step"><div class="no">2</div><h4>Isolate peers</h4><p>Keep only the <b>281 &times; 764&nbsp;sqft 2-Bedroom Premium</b> sales &mdash; the only true like-for-like comparables.</p></div>
+    <div class="step"><div class="no">3</div><h4>Engineer features</h4><p>Pull <b>layout</b> (BP1/2/3) from the floor-plan image URL; <b>floor</b> &amp; <b>stack</b> from the unit number; <b>months</b> since launch from the date.</p></div>
+    <div class="step"><div class="no">4</div><h4>Fit a model</h4><p>A hedonic regression learns the &#36; value of each floor, each month of market growth, and each layout.</p></div>
+    <div class="step"><div class="no">5</div><h4>Blend &amp; sanity-check</h4><p>Average the model with the single best real comparable (#22-16) to avoid trusting an extrapolation too far.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>The model that priced it</h2>
+  <p class="lead">A linear hedonic regression on all 281 peer sales. It decomposes price-per-square-foot into the things that actually move it:</p>
+  <div class="cols">
+    <div class="card">
+      <div class="eq">
+        <span class="v">PSF</span> = 1,484<br>
+        &nbsp;&nbsp;+ <span class="c">6.4</span> &times; floor<br>
+        &nbsp;&nbsp;+ <span class="c">8.0</span> &times; months&#8209;since&#8209;launch<br>
+        &nbsp;&nbsp;+ <span class="c">69</span> &nbsp;if BP1 &nbsp;(vs BP2)<br>
+        &nbsp;&nbsp;+ <span class="c">89</span> &nbsp;if BP3 &nbsp;(vs BP2)
+      </div>
+      <p class="note">Fit on n = 281 sales. <b>R&sup2; = 0.98</b> &mdash; floor, timing and layout alone explain 98% of the PSF differences between units.</p>
+    </div>
+    <div class="card">
+      <table class="coef">
+        <tr><td>Each floor higher</td><td>storey premium</td><td>+$6.4 psf</td></tr>
+        <tr><td>Each month of market growth</td><td>~$95 / yr</td><td>+$8.0 psf</td></tr>
+        <tr><td>BP3 "butterfly" vs BP2</td><td>your layout</td><td>+$89 psf</td></tr>
+        <tr><td>BP1 vs BP2</td><td>layout</td><td>+$69 psf</td></tr>
+      </table>
+      <p style="font-size:13px;color:#33495b;margin-top:12px">For <b>#19-16</b> (floor 19, May 2026, BP3) the model lands at <b>$2,215 psf</b>. But the raw model rides the launch-era trend a little too hard at the edge &mdash; see the next section &mdash; so the headline figure blends it 50/50 with the closest real sale.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>From model to the final number</h2>
+  <p class="lead">Two independent estimates were averaged, then a sensible spread was placed around the centre.</p>
+  <div class="card">
+    <div class="cols" style="align-items:center">
+      <div>
+        <table class="coef">
+          <tr><td><b>Hedonic model</b> &mdash; floor 19, BP3, today</td><td></td><td>$2,215 psf</td></tr>
+          <tr><td><b>Benchmark #22-16</b> &mdash; same stack, BP3, +3 floors, Mar 2026 resale</td><td></td><td>$2,159 psf</td></tr>
+          <tr style="border-top:2px solid var(--navy)"><td><b>50 / 50 blend &rarr; Fair value</b></td><td></td><td style="color:var(--teal);font-size:16px">$2,187 psf</td></tr>
+          <tr><td style="color:var(--muted)">&rarr; at 764 sqft</td><td></td><td>$1,671,000</td></tr>
+        </table>
+      </div>
+      <div>
+        <p style="font-size:13.5px;color:#33495b;margin-top:0">Why blend, instead of just using the model's $2,215? When the model is asked to "re-predict" the actual #22-16 sale, it comes out <b>$59 psf too high</b>. That's a tell that the time-trend over-reaches at the very recent end (it's anchored by hundreds of 2020&ndash;21 launch prices). Averaging with a genuine, same-stack resale pulls the estimate back to something the market has actually paid.</p>
+      </div>
+    </div>
+    <div class="band-fig">
+      <div class="scale">
+        <div class="axis"></div>
+        <!-- ci band ~ +/-33k around fair, mapped across the strip -->
+        <div class="ci" style="left:30%;right:42%"></div>
+        <div class="mark"      style="left:8%"></div><div class="mlab" style="left:8%">Floor<b>$1.63M</b></div>
+        <div class="mark gold" style="left:38%"></div><div class="mlab" style="left:38%;color:var(--gold)">Fair<b style="color:var(--gold)">$1.67M</b></div>
+        <div class="mark"      style="left:78%"></div><div class="mlab" style="left:78%">List<b>$1.74M</b></div>
+        <div class="mark"      style="left:96%"></div><div class="mlab" style="left:96%">Ceiling<b>$1.78M</b></div>
+      </div>
+      <p class="note" style="text-align:center">Shaded zone = the &plusmn;$33k real-world margin of error around fair value (1 std-dev of recent prediction errors).</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>How confident &mdash; and why</h2>
+  <p class="lead">The honest numbers behind the "7 / 10". Good fit, but the most relevant slice of data is genuinely thin.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">0.98</div><div class="l">Model R&sup2; (variance explained)</div></div>
+    <div class="stat"><div class="n">&plusmn;$43</div><div class="l">Real error per psf on 2024+ sales (1&sigma;)</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">True <i>resales</i> in the 764 peer pool</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">764&nbsp;sqft sales in all of 2026</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <ul class="notes">
+      <li><b>The fit is real, but flattered.</b> Across all 281 sales the average miss is only ~$17/psf &mdash; but that's inflated by tightly-priced launch units. On <b>recent (2024+) sales the typical miss is ~$35/psf and the spread is &plusmn;$43/psf</b>. That's the error you should actually expect: roughly <b>&plusmn;$33k</b> on this unit.</li>
+      <li><b>The data is lopsided toward the past.</b> Of the 281 peer sales, <b>214 are launch "New" sales (2020&ndash;21)</b> and <b>62 are pre-completion sub-sales</b> &mdash; only <b>5 are true resales</b>. Resale, sub-sale and launch markets don't price identically, so the model leans on a lot of older, structurally-cheaper evidence.</li>
+      <li><b>The very-recent window is sparse.</b> Just <b>5 of the 764 sqft sales occurred in 2026</b>, and only <b>9 stack-16 BP3 sales since 2024</b> (ranging $2,057&ndash;$2,198 psf, a real $140 spread). Small samples &rArr; wider uncertainty on "today's" price.</li>
+      <li><b>One near-perfect anchor saves it.</b> #22-16 is the same stack, same BP3 layout, three floors up, sold just two months ago. Having that single high-quality comparable is what lifts confidence from "model guess" to "defensible".</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Strengths &amp; weaknesses</h2>
+  <div class="cols">
+    <div class="pc pro">
+      <h3>✓ What makes this trustworthy</h3>
+      <ul>
+        <li><b>Large, clean sample.</b> 826 transactions; 281 exact-type peers.</li>
+        <li><b>Like-for-like.</b> Compared only to 764 sqft 2BR Premium units &mdash; not the whole project.</li>
+        <li><b>Layout captured precisely.</b> BP1/2/3 read from the actual floor-plan URLs, so the +$89 BP3 premium is measured, not assumed.</li>
+        <li><b>High explanatory power.</b> R&sup2; = 0.98; floor + time + layout account for nearly all variation.</li>
+        <li><b>A gold-standard comparable exists</b> (#22-16) and the estimate is tied to it.</li>
+        <li><b>Transparent &amp; reproducible</b> &mdash; one script, no hidden steps.</li>
+      </ul>
+    </div>
+    <div class="pc con">
+      <h3>✗ Where it can be wrong</h3>
+      <ul>
+        <li><b>Blind to unit condition.</b> Caveats carry no info on renovation, furnishing, tenancy or actual view quality &mdash; a renovated unit can beat the model by tens of thousands.</li>
+        <li><b>Time-trend extrapolation.</b> The +$8/mo slope is set by launch-era data and over-shoots at the tail (proven: +$59 on #22-16).</li>
+        <li><b>Thin resale evidence.</b> Only 5 true resales among peers; mostly launch + sub-sale data.</li>
+        <li><b>View premium is qualitative.</b> The south-facing sea/cruise aspect isn't a model variable &mdash; it's argued, not measured.</li>
+        <li><b>No macro factors.</b> Interest rates, cooling measures, MRT/amenity changes and overall sentiment aren't modelled.</li>
+        <li><b>Linear assumptions.</b> Floor premium is treated as constant; real markets bend (penthouse jumps, low-floor discounts).</li>
+        <li><b>Survivorship.</b> Only units that <i>sold</i> appear &mdash; unsold listings (and their asking prices) are invisible.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Confidence, claim by claim</h2>
+  <p class="lead">Not every statement deserves equal trust. Here's where each one sits.</p>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="claims">
+      <tr><th>Claim</th><th>Evidence</th><th>Confidence</th></tr>
+      <tr><td>BP3 &gt; BP1 &gt; BP2, and higher floors cost more</td><td>281 sales, very consistent</td><td><span class="rate r-vh">Very high</span></td></tr>
+      <tr><td>The resale market is rising (~$95/psf/yr)</td><td>Clear 2024&rarr;2026 uptrend</td><td><span class="rate r-vh">Very high</span></td></tr>
+      <tr><td>Fair value sits in $1.63M&ndash;$1.71M ($2,130&ndash;$2,240 psf)</td><td>Brackets recent comps + model</td><td><span class="rate r-h">High</span></td></tr>
+      <tr><td>Point estimate is ~$1.67M ($2,187 psf)</td><td>Blend of model + #22-16; &plusmn;$33k</td><td><span class="rate r-m">Moderate</span></td></tr>
+      <tr><td>List at ~$1.74M to anchor negotiation</td><td>Strategy, just above BP3 ceiling</td><td><span class="rate r-m">Moderate</span></td></tr>
+      <tr><td>The exact final transacted price</td><td>Depends on condition, buyer, timing</td><td><span class="rate r-l">Lower</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>How to make it more accurate</h2>
+  <div class="card">
+    <ul class="notes">
+      <li><b>Add active listings.</b> Current asking prices for other 764 sqft units would calibrate "today" far better than 2024&ndash;25 caveats.</li>
+      <li><b>Factor in your unit's condition.</b> Recent renovation, furnishing and the real view from #19-16 can justify pushing above the model.</li>
+      <li><b>Re-run as new caveats land.</b> Each fresh stack-16 / BP3 resale tightens the estimate &mdash; the pipeline re-runs from <span class="kbd">build.py</span> in seconds.</li>
+      <li><b>Cross-check URA.</b> Verify the scraped caveats against official URA data before listing.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<div class="foot">
+  Methodology companion to the <a href="./">#19-16 Comparative Market Analysis</a>. Figures are decision-support estimates from public caveat data, not a formal valuation or financial advice.<br>
+  Model: ordinary-least-squares hedonic regression on the 764 sqft transaction pool · reproducible via <span class="kbd">build.py</span>.
+</div>
+</body>
+</html>
